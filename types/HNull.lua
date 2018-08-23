@@ -6,3 +6,6 @@ function HNull:toZinc()
 end
 function HNull:toJson()
     return "null"
+end
+
+return HNull
