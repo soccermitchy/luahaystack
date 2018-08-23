@@ -6,11 +6,11 @@ Currently, I do not aim to implement every datatype in the Haystack standard. He
 - [ ] Grids
 - [ ] Lists
 - [ ] Dicts
-- [ ] nulls
+- [x] nulls 
 - [x] Bools
-- [ ] Markers
-- [ ] Removes
-- [ ] NAs
+- [x] Markers
+- [x] Removes
+- [x] NAs
 - [x] Numbers
 - [ ] Refs
 - [ ] Strs
