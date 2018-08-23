@@ -14,7 +14,7 @@ Currently, I do not aim to implement every datatype in the Haystack standard. He
 - [x] Numbers
 - [x] Refs
 - [x] Strs
-- [ ] Uris
+- [x] Uris
 - [ ] Coords
 - [ ] XStrs
 
