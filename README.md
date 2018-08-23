@@ -12,8 +12,8 @@ Currently, I do not aim to implement every datatype in the Haystack standard. He
 - [x] Removes
 - [x] NAs
 - [x] Numbers
-- [ ] Refs
-- [ ] Strs
+- [x] Refs
+- [x] Strs
 - [ ] Uris
 - [ ] Coords
 - [ ] XStrs
