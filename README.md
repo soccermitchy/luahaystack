@@ -15,7 +15,7 @@ Currently, I do not aim to implement every datatype in the Haystack standard. He
 - [x] Refs
 - [x] Strs
 - [x] Uris
-- [ ] Coords
-- [ ] XStrs
+- [x] Coords
+- [x] XStrs
 
 Basically, I aim to implement everything _except_ Date, Time, and DateTime.
