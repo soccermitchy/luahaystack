@@ -1,2 +1,1 @@
-export.HType = require'./types/HType'
-
+exports.types = require'./types'
