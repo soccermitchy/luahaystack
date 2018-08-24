@@ -16,7 +16,7 @@ function HList:initialize(list)
 end
 
 function HList:add(element)
-    if not type(element) == "table" then
+    if not type(element) == "table" and not element.toZinc then
         error "type not inheriting from HType passed to HList"
     end
     table.insert(self.list, element)

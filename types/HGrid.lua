@@ -1,0 +1,65 @@
+local HType = require './HType'
+local HDict = require './HDict'
+local HGrid = HType:extend("HGrid")
+
+-- meta: HDict
+-- cols: Array<HCol> or string
+-- data: Array<HList>
+function HGrid:initialize(meta, cols, data)
+    meta = meta or HDict:new()
+
+    cols = (cols and type(cols) == "table" and #cols>0) or error "No cols given"
+    data = (data and type(data) == "table" and #data>0) or error "No data given"
+
+    self.meta = meta
+    
+    for k,v in pairs(cols) do
+        if (type(v) ~= "table" or v._type ~= "HCol") and type(v) ~= "string" then
+            error "Non-HCol/non-string given as a header"
+        end
+    end
+    self.cols = cols
+
+    for k,v in pairs(data) do
+        if type(v) ~= "table" or v.toZinc == nil then
+            error "Non-HType given as data value"
+        end
+    end
+    self.data = data
+end
+
+function HGrid:toZinc()
+    local s = ""
+    -- build meta
+    s = s .. 'ver: "3.0"'
+    if (#self.meta > 0) then
+        s = s .. ' '
+        local valueTable = {}
+        for k,v in pairs(self.meta.dict) do
+            local value = k
+            if v._type ~= "HMarker" then
+                value = value .. ": " .. v:toZinc()
+            end
+            table.insert(valueTable, value)
+        end
+        s = s .. table.concat(value) .. "\n"
+    end
+    
+    -- build header
+    local headerTable = {}
+    for k,v in pairs(self.cols) do
+        table.insert(headerTable, v:toZinc())
+    end
+    s = s .. table.concat(headerTable, " ") .. "\n"
+
+    -- build data
+    for k,v in pairs(self.data) do
+        local rowData = {}
+        for k2,v2 in pairs(v.data) do
+            table.insert(rowData, v2:toZinc())
+        end
+        s = s .. table.concat(rowData, ",") .. "\n"
+    end
+    s = s .. "\n"
+    return s
+end

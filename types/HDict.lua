@@ -42,7 +42,7 @@ function HDict:toJson()
         local s = '"' .. k .. '": ' .. v:toJson()
         table.insert(valueTable, s)
     end
-    return "{" .. table.concat(valueTable, " ") .. "}"
+    return "{" .. table.concat(valueTable, ", ") .. "}"
 end
 
 return HDict
