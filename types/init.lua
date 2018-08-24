@@ -2,6 +2,7 @@ exports.HType = require './HType'
 
 exports.HBool = require './HBool'
 exports.HCoord = require './HCoord'
+exports.HList = require './HList'
 exports.HMarker = require './HMarker'
 exports.HNA = require './HNA'
 exports.HNull = require './HNull'

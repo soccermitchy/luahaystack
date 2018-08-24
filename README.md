@@ -4,7 +4,7 @@ The goal of this project is to have a relatively feature complete Haystack imple
 # Implemented/To-be-implemented datatypes
 Currently, I do not aim to implement every datatype in the Haystack standard. Here's what I currently am planning on implementing, with a checked box meaning it's done:
 - [ ] Grids
-- [ ] Lists
+- [x] Lists
 - [ ] Dicts
 - [x] nulls 
 - [x] Bools
