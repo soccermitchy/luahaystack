@@ -7,7 +7,7 @@ function HCol:initialize(name, meta)
     if name == nil then
         error "no column name specified"
     end
-    meta = meta or {}
+    meta = meta or {_type = "HDict",dict={}}
     if type(meta) ~= table and not meta._type == "HDict" then
         error "non-HDict given for meta in HCol"
     end
@@ -16,7 +16,7 @@ function HCol:initialize(name, meta)
 end
 
 function HCol:toZinc()
-    local s = name
+    local s = self.name
     if #self.meta ~= 0 then
         local valueTable = {}
         for k,v in pairs(self.meta.dict) do

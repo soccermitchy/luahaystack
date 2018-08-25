@@ -1,5 +1,8 @@
 local HType = require './HType'
 local HDict = require './HDict'
+local HList = require './HList'
+local HMarker = require './HMarker'
+local HCol = require './HCol'
 local HGrid = HType:extend("HGrid")
 
 -- meta: HDict
@@ -8,14 +11,16 @@ local HGrid = HType:extend("HGrid")
 function HGrid:initialize(meta, cols, data)
     meta = meta or HDict:new()
 
-    cols = (cols and type(cols) == "table" and #cols>0) or error "No cols given"
-    data = (data and type(data) == "table" and #data>0) or error "No data given"
+    cols = (cols~=nil and type(cols) == "table" and #cols>0 and cols) or error "No cols given"
+    data = (data~=nil and type(data) == "table" and #data>0 and data) or error "No data given"
 
     self.meta = meta
-    
     for k,v in pairs(cols) do
         if (type(v) ~= "table" or v._type ~= "HCol") and type(v) ~= "string" then
             error "Non-HCol/non-string given as a header"
+        end
+        if type(v) == "string" then
+            cols[k] = HCol:new(v)
         end
     end
     self.cols = cols
@@ -42,9 +47,9 @@ function HGrid:toZinc()
             end
             table.insert(valueTable, value)
         end
-        s = s .. table.concat(value) .. "\n"
+        s = s .. table.concat(value)
     end
-    
+    s = s .. "\n"
     -- build header
     local headerTable = {}
     for k,v in pairs(self.cols) do
@@ -55,7 +60,7 @@ function HGrid:toZinc()
     -- build data
     for k,v in pairs(self.data) do
         local rowData = {}
-        for k2,v2 in pairs(v.data) do
+        for k2,v2 in pairs(v.list) do
             table.insert(rowData, v2:toZinc())
         end
         s = s .. table.concat(rowData, ",") .. "\n"
@@ -63,3 +68,10 @@ function HGrid:toZinc()
     s = s .. "\n"
     return s
 end
+
+function HGrid:toJson()
+
+end
+
+local grid = HGrid:new(nil, {"test"}, {HList:new({HMarker:new()})})
+print(grid:toZinc())

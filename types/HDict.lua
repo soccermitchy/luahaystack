@@ -1,7 +1,7 @@
 local HType = require'./HType'
 local HDict = HType:extend("HDict")
 
-function HBool:initialize(dict)
+function HDict:initialize(dict)
     dict = dict or {}
     for k,v in pairs(dict) do
         if type(k) == "number" then
